@@ -5,8 +5,10 @@ using System.Collections.Generic;
 public class soundstuff : MonoBehaviour {
 
 	private Dictionary<string, ServerLog> servers;
+	private List<float> listtoPD = new List<float>();	
 	private float sendVar;
 	public GameObject enemy;
+	private float zPos;
 
 	public float c = 34.0f;
 	//λ2 = λ (1 + v/c)	
@@ -18,10 +20,13 @@ public class soundstuff : MonoBehaviour {
 	void Start () {
 
 		OSCHandler.Instance.Init(); //init OSC
-		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", sendVar);
+		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
 		//OSCHandler.Instance.SendMessage ("hey");
 
 		servers = new Dictionary<string, ServerLog>();
+
+		listtoPD.Add (sendVar);
+		listtoPD.Add (zPos);
 	
 	}
 	
@@ -38,21 +43,31 @@ public class soundstuff : MonoBehaviour {
 		enemy = GameObject.FindGameObjectWithTag ("Enemy");	 
 		//Herot = GameObject.FindGameObjectsWithTag ("HeroTag");
 		float distance = Vector3.Distance(enemy.transform.position, transform.position);
+		zPos = enemy.transform.position.z - transform.position.z;
+		//Debug.Log (enemy.transform.position.z - transform.position.z);
 
 
-		if(distance>0){	 
-			λ2 = λ *((1 + v)/c);
+		if(zPos<0){	 
+			λ2 = (λ *(c/(c + v)))/150.0f;
 		}	 
-		if(distance<0){	 
-				λ2 = λ *((1 - v)/c);
+		if(zPos>0){	 
+			λ2 = (λ *(c/(c - v)))/150.0f;
 		}
 
-		sendVar = λ2;
-		Debug.Log (sendVar);
+		/*
+		if(zPos<0){	 
+			λ2 = 1.05f;
+		}	 
+		if(zPos>0){	 
+			λ2 = 1.5f;
+		}*/
 
-		//testVar += Time.deltaTime*10;
+		sendVar = 1/distance*300; //300 For Freqmod. 100 for ampmod
+		//Debug.Log (Mathf.Abs(transform.parent.rigidbody.velocity.z*10));
 
-		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", sendVar);
+		listtoPD [0] = sendVar;
+		listtoPD[1] = λ2;
+		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
 
 		// http://en.flossmanuals.net/pure-data/network-data/osc/ 
 	}
