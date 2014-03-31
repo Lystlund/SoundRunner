@@ -15,6 +15,7 @@ public class soundstuff : MonoBehaviour {
 	public float v = 10.0f;	
 	public float λ = 440.0f;	
 	public float λ2 = 440.0f;	
+	public float pan;
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +26,11 @@ public class soundstuff : MonoBehaviour {
 
 		servers = new Dictionary<string, ServerLog>();
 
+		pan = 2; //0 is left. 1 is right. 2 is both.
+
 		listtoPD.Add (sendVar);
 		listtoPD.Add (zPos);
+		listtoPD.Add (pan);
 	
 	}
 	
@@ -48,10 +52,10 @@ public class soundstuff : MonoBehaviour {
 
 
 		if(zPos<0){	 
-			λ2 = (λ *(c/(c + v)))/150.0f;
+			λ2 = (λ *(c/(c + v)))/350.0f;
 		}	 
 		if(zPos>0){	 
-			λ2 = (λ *(c/(c - v)))/150.0f;
+			λ2 = (λ *(c/(c - v)))/350.0f;
 		}
 
 		/*
@@ -62,11 +66,12 @@ public class soundstuff : MonoBehaviour {
 			λ2 = 1.5f;
 		}*/
 
-		sendVar = 1/distance*300; //300 For Freqmod. 100 for ampmod
+		sendVar = 1/distance*100; //300 For Freqmod. 100 for ampmod
 		//Debug.Log (Mathf.Abs(transform.parent.rigidbody.velocity.z*10));
 
 		listtoPD [0] = sendVar;
 		listtoPD[1] = λ2;
+		listtoPD [2] = pan;
 		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
 
 		// http://en.flossmanuals.net/pure-data/network-data/osc/ 

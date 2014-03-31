@@ -17,9 +17,11 @@
 #X obj 145 368 vline~;
 #X msg 150 321 \$1 50;
 #X obj 152 267 / 3;
+#X floatatom 82 355 5 0 0 0 - - -;
 #X connect 0 0 3 0;
 #X connect 1 0 2 1;
 #X connect 2 0 12 0;
+#X connect 2 0 12 1;
 #X connect 3 0 1 0;
 #X connect 3 0 5 0;
 #X connect 4 0 3 1;
@@ -31,4 +33,5 @@
 #X connect 10 2 0 0;
 #X connect 14 0 2 0;
 #X connect 15 0 14 0;
+#X connect 15 0 17 0;
 #X connect 16 0 15 0;
