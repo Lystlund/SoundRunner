@@ -26,27 +26,31 @@ public class Movement : MonoBehaviour {
 			transform.position += new Vector3 (0, 0, mSpeed);
 
 			//Move left	
-			if (Input.GetKeyDown (KeyCode.A) && transform.position.x > -2.8f) {
+			if (Input.GetKeyDown (KeyCode.A) && transform.position.x > -2.0f) {
 					transform.position += new Vector3 (-3.0f, 0, 0);
 			}
 
 			//Move right
-			if (Input.GetKeyDown (KeyCode.D) && transform.position.x < 2.8f) {
+			if (Input.GetKeyDown (KeyCode.D) && transform.position.x < 2.0f) {
 					transform.position += new Vector3 (3.0f, 0, 0);
 			}
 
 			//jump	
-			if (Input.GetKeyDown (KeyCode.W) && transform.position.y < 0.5f) {
-					rigidbody.AddForce (new Vector3 (0, 500.0f, 0));	
+			if (Input.GetKeyDown (KeyCode.W) && transform.position.y < 0.8) {
+				rigidbody.AddForce(0, 8, 0, ForceMode.Impulse);
 			}
 
 			//crouch	
 			if (Input.GetKey (KeyCode.S)) {
 					transform.localScale = new Vector3 (1, 0.5f, 1); //as long as s is pressed scale to this size 
 					myCollider.radius = 0.25f;
-			} else {
+			} 
+			//normal size
+			else {
 					transform.localScale = new Vector3 (1, 1, 1); //else be this size
+					myCollider.radius = 0.5f;
 			}
+
 		}
 	}
 
