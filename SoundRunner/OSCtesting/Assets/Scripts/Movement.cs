@@ -52,10 +52,13 @@ public class Movement : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{	
-		if(other.gameObject.tag == "Enemy") //if you hit an enemy(obstacle) you loose one health
-		{
+		if (other.gameObject.tag == "Enemy") { 
 			ObsHit = ObsHit + 1;
-			Debug.Log(ObsHit);
-		}	
+			Debug.Log (ObsHit);
+		}
+
+		if (other.gameObject.tag == "Finish") {
+			Application.LoadLevel(0);
+		}
 	}
 }
