@@ -25,7 +25,7 @@ public class TextControl : MonoBehaviour {
 
 		else{
 			//load level
-			Application.LoadLevel(1);
+			Application.LoadLevel(2);
 		}
 	}
 }

@@ -62,7 +62,21 @@ public class Movement : MonoBehaviour {
 		}
 
 		if (other.gameObject.tag == "Finish") {
-			Application.LoadLevel(0);
+			if (Application.loadedLevel == 2){
+				Application.LoadLevel(3);
+			}
+
+			if (Application.loadedLevel == 3){
+				Application.LoadLevel(4);
+			}
+
+			if (Application.loadedLevel == 4){
+				Application.LoadLevel(5);
+			}
+
+			if (Application.loadedLevel == 5){
+				Application.LoadLevel(1);
+			}
 		}
 	}
 }
