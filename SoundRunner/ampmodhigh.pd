@@ -1,4 +1,4 @@
-#N canvas 2265 113 401 329 10;
+#N canvas 825 113 401 329 10;
 #X obj 176 13 inlet;
 #X obj 134 237 outlet~;
 #X obj 134 181 *~;
@@ -12,8 +12,9 @@
 #X text 192 86 SET AROUND 140;
 #X obj 176 137 osc~;
 #X obj 176 105 * 500;
+#X obj 136 207 /~ 1.2;
 #X connect 0 0 6 0;
-#X connect 2 0 1 0;
+#X connect 2 0 13 0;
 #X connect 3 0 7 0;
 #X connect 6 0 12 0;
 #X connect 7 0 8 0;
@@ -21,3 +22,4 @@
 #X connect 11 0 2 1;
 #X connect 12 0 9 0;
 #X connect 12 0 11 0;
+#X connect 13 0 1 0;

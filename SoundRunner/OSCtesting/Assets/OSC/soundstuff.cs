@@ -225,9 +225,10 @@ public class soundstuff : MonoBehaviour {
 		}
 
 		lowVar = 1/distanceLow*100;
-		if (lowVar > 100) {
-			lowVar = 100;		
+		if (lowVar > 50) {
+			lowVar = 50;	
 		}
+		Debug.Log (lowVar);
 
 	//HIGH
 		distanceHigh = Vector3.Distance(enemiesHigh[h].transform.position, transform.position);
@@ -275,14 +276,14 @@ public class soundstuff : MonoBehaviour {
 
 		//Panning: 0 is left. 1 is right. 2 is both.
 
-		Debug.Log (enemiesMid [l].transform.position.x);
+		//Debug.Log (enemiesMid [l].transform.position.x);
 		if (enemiesMid[m].transform.position.x > 0) {
 			pan = 1;
-			Debug.Log("RIGHT!");
+			//Debug.Log("RIGHT!");
 		}
 		else{
 			pan = 0;
-			Debug.Log("LEFT!");
+			//Debug.Log("LEFT!");
 		}
 
 

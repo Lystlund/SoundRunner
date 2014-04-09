@@ -1,4 +1,4 @@
-#N canvas 2157 6 1113 878 10;
+#N canvas 720 22 720 852 10;
 #X declare -lib mrpeach;
 #X obj 94 2 import mrpeach;
 #X obj 94 30 udpreceive 6666;
@@ -11,7 +11,7 @@
 #X floatatom 507 259 5 0 0 0 - - -;
 #X floatatom 576 259 5 0 0 0 - - -;
 #X obj 507 336 highObsSound;
-#X obj 368 365 lowObsSound;
+#X obj 360 350 lowObsSound;
 #X obj 445 143 unpack string f f f f f f f;
 #X floatatom 661 284 5 0 0 0 - - -;
 #X floatatom 730 284 5 0 0 0 - - -;
