@@ -8,7 +8,6 @@
 #X obj 205 38 inlet;
 #X obj 160 332 outlet~;
 #X obj 217 278 /~ 2;
-#X obj 323 172 ampmodmid;
 #X connect 0 0 1 0;
 #X connect 1 0 8 0;
 #X connect 2 0 1 1;
