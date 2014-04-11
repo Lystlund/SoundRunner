@@ -26,6 +26,7 @@ to pans;
 #X text 825 561 make low obs louder;
 #X text 431 567 make a hit sound effect;
 #X text 826 501 DONE;
+#X text 436 546 make everything 0 on exit;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 1 12 0;

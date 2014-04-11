@@ -209,13 +209,24 @@ public class soundstuff : MonoBehaviour {
 	//LOW
 		if (lowObjects) {
 			distanceLow = Vector3.Distance (enemiesLow [l].transform.position, transform.position);
-			distanceLowNext = Vector3.Distance (enemiesLow [ln].transform.position, transform.position);
+
+			if(ln > enemiesLow.Length-1)
+			{}
+			else{
+				distanceLowNext = Vector3.Distance (enemiesLow [ln].transform.position, transform.position);
+			}
+
+
 
 			if (distanceLowNext < distanceLow) {
-
+				if(ln+1 > enemiesLow.Length-1) 
+				{}
+				else{
 					l++;
 					ln++;
+				}
 			}
+
 			zPosLow = enemiesLow [l].transform.position.z - transform.position.z;
 
 
@@ -243,12 +254,23 @@ public class soundstuff : MonoBehaviour {
 	//HIGH
 		if (highObjects) {
 			distanceHigh = Vector3.Distance (enemiesHigh [h].transform.position, transform.position);
-			distanceHighNext = Vector3.Distance (enemiesHigh [hn].transform.position, transform.position);
+
+			if(hn > enemiesHigh.Length-1)
+			{
+			}
+			else{
+				distanceHighNext = Vector3.Distance (enemiesHigh [hn].transform.position, transform.position);
+			}
 
 			if (distanceHighNext < distanceHigh) {
+				if(hn+1 > enemiesHigh.Length-1) {
+				}
+				else{
 					h++;
 					hn++;
+				}
 			}
+
 			zPosHigh = enemiesHigh [h].transform.position.z - transform.position.z;
 
 
@@ -272,12 +294,26 @@ public class soundstuff : MonoBehaviour {
 	//MID
 		if (midObjects) {
 			distanceMid = Vector3.Distance (enemiesMid [m].transform.position, transform.position);
-			distanceMidNext = Vector3.Distance (enemiesMid [mn].transform.position, transform.position);
 
+			if(mn > enemiesMid.Length-1)
+			{
+			}
+			else{
+				distanceMidNext = Vector3.Distance (enemiesMid [mn].transform.position, transform.position);
+			}
+
+			//Debug.Log(enemiesMid[m]+ " "+enemiesMid[mn]);
+			Debug.Log(distanceMidNext+ " "+distanceMid);
+			
 			if (distanceMidNext < distanceMid) {
+				//if(mn+1 == enemiesMid.Length) {
+			//	}
+				//else{
 					m++;
 					mn++;
+				//}
 			}
+
 			zPosMid = enemiesMid [m].transform.position.z - transform.position.z;
 
 
@@ -318,7 +354,7 @@ public class soundstuff : MonoBehaviour {
 				}
 					//Debug.Log("LEFT!");
 			}
-			Debug.Log(newPan);
+			//Debug.Log(newPan);
 
 
 		}
