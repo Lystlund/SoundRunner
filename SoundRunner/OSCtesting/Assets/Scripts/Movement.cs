@@ -5,6 +5,7 @@ public class Movement : MonoBehaviour {
 	public float mSpeed = 0.3f;
 	public int ObsHit = 0;
 	bool justStarted = true;
+	public int levelholder;
 
 	IEnumerator WaitForStart() {
 		yield return new WaitForSeconds(1);
@@ -16,6 +17,8 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Update () {
+		int level = Application.loadedLevel;
+		levelholder = level;
 		if (justStarted == true) {
 			StartCoroutine (WaitForStart());
 		} 
@@ -55,27 +58,37 @@ public class Movement : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other)
-	{	
-		if (other.gameObject.tag == "Enemy") { 
+	{
+		if (other.gameObject.tag == "LowOBS" || other.gameObject.tag == "MidOBS" || other.gameObject.tag == "HighOBS") { 
+			if (Application.loadedLevel == 1){
 			ObsHit = ObsHit + 1;
 			Debug.Log (ObsHit);
+			}
+			else{
+				Application.LoadLevel(levelholder);
+			}
 		}
 
 		if (other.gameObject.tag == "Finish") {
-			if (Application.loadedLevel == 2){
+
+			if (Application.loadedLevel == 3){
 				Application.LoadLevel(3);
 			}
 
-			if (Application.loadedLevel == 3){
+			if (Application.loadedLevel == 4){
 				Application.LoadLevel(4);
 			}
 
-			if (Application.loadedLevel == 4){
+			if (Application.loadedLevel == 5){
 				Application.LoadLevel(5);
 			}
 
-			if (Application.loadedLevel == 5){
-				Application.LoadLevel(1);
+			if (Application.loadedLevel == 6){
+				Application.LoadLevel(6);
+			}
+
+			if (Application.loadedLevel == 7){
+				Application.LoadLevel(7);
 			}
 		}
 	}
