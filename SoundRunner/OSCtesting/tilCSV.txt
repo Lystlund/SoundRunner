@@ -1,0 +1,6 @@
+Obsticals hit: 1   At time: 3   At position: 14.4921
+Obsticals hit: 2   At time: 11   At position: 24.26543
+hit, time, zPos
+1, 3, 14.48133
+2, 4, 24.06276
+3, 6, 52.7924
