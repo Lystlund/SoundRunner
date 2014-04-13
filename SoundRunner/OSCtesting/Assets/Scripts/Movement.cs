@@ -88,8 +88,10 @@ public class Movement : MonoBehaviour {
 
 			//crouch	
 			if (Input.GetKey (KeyCode.S)) {
-					transform.localScale = new Vector3 (1, 0.5f, 1); //as long as s is pressed scale to this size 
-					myCollider.radius = 0.25f;
+					
+				transform.localScale = new Vector3 (1, 0.5f, 1); //as long as s is pressed scale to this size 
+				myCollider.radius = 0.25f;
+				rigidbody.AddForce(0, -2, 0 , ForceMode.Impulse);
 			}
 			//normal size
 			else {
