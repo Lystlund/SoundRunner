@@ -79,7 +79,7 @@ public class soundstuff : MonoBehaviour {
 		listtoPD.Add (zPosHigh);
 		listtoPD.Add (midVar);
 		listtoPD.Add (zPosMid);
-		listtoPD.Add (pan);
+		listtoPD.Add (newPan);
 
 
 		List<float> listTest = new List<float>();
@@ -359,7 +359,6 @@ public class soundstuff : MonoBehaviour {
 
 		}
 
-
 		listtoPD [0] = lowVar;
 		listtoPD [1] = f2Low;
 
@@ -388,4 +387,25 @@ public class soundstuff : MonoBehaviour {
 
 
 	}
+
+
+	void OnApplicationQuit(){
+
+		//SENDING 0
+
+		listtoPD [0] = 0;
+		listtoPD [1] = 0;
+		listtoPD [2] = 0;
+		listtoPD [3] = 0;
+		listtoPD [4] = 0;
+		listtoPD [5] = 0;
+		listtoPD [6] = 0;
+
+		OSCHandler.Instance.Init(); //init OSC
+
+		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
+
+	}
+
+
 }
