@@ -79,11 +79,11 @@ public class Movement : MonoBehaviour {
 
 			//jump	
 			if (Input.GetKeyDown (KeyCode.W) && transform.position.y < 0.8) {
-				rigidbody.AddForce(0, 20, 0 , ForceMode.Impulse);
+				rigidbody.AddForce(0, 25, 0 , ForceMode.Impulse);
 			}
 			//if target gets to high, makes them fall down faster
-			if (transform.position.y > 2){
-				rigidbody.AddForce(0, -4, 0 , ForceMode.Impulse);
+			if (transform.position.y > 2.5f){
+				rigidbody.AddForce(0, -2.5f, 0 , ForceMode.Impulse);
 			}
 
 			//crouch	
