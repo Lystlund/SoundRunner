@@ -361,16 +361,16 @@ public class soundstuff : MonoBehaviour {
 
 		}
 
-	//	listtoPD [0] = lowVar;
-	//	listtoPD [1] = f2Low;
+		listtoPD [0] = lowVar;
+		listtoPD [1] = f2Low;
 
-	//	listtoPD [2] = highVar;
-	//	listtoPD [3] = f2High;
+		listtoPD [2] = highVar;
+		listtoPD [3] = f2High;
 
-	//	listtoPD [4] = midVar;
-	//	listtoPD [5] = f2Mid;
+		listtoPD [4] = midVar;
+		listtoPD [5] = f2Mid;
 
-	//	listtoPD [6] = newPan;
+		listtoPD [6] = newPan;
 
 		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listTest);
 
