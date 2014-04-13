@@ -61,6 +61,8 @@ public class soundstuff : MonoBehaviour {
 	bool highObjects = false;
 	bool midObjects = false;
 
+	List<float> listTest = new List<float>();
+
 
 	// Use this for initialization
 	void Start () {
@@ -82,7 +84,7 @@ public class soundstuff : MonoBehaviour {
 		listtoPD.Add (newPan);
 
 
-		List<float> listTest = new List<float>();
+
 		listTest.Add (2.0f);
 		listTest.Add (7.0f);
 		listTest.Add (1.0f);
@@ -359,18 +361,18 @@ public class soundstuff : MonoBehaviour {
 
 		}
 
-		listtoPD [0] = lowVar;
-		listtoPD [1] = f2Low;
+	//	listtoPD [0] = lowVar;
+	//	listtoPD [1] = f2Low;
 
-		listtoPD [2] = highVar;
-		listtoPD [3] = f2High;
+	//	listtoPD [2] = highVar;
+	//	listtoPD [3] = f2High;
 
-		listtoPD [4] = midVar;
-		listtoPD [5] = f2Mid;
+	//	listtoPD [4] = midVar;
+	//	listtoPD [5] = f2Mid;
 
-		listtoPD [6] = newPan;
+	//	listtoPD [6] = newPan;
 
-		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
+		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listTest);
 
 		// http://en.flossmanuals.net/pure-data/network-data/osc/ 
 
