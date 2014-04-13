@@ -99,6 +99,10 @@ public class Movement : MonoBehaviour {
 					myCollider.radius = 0.5f;
 			}
 
+			if (Input.GetKey (KeyCode.Escape)) {
+				Application.LoadLevel(0);
+			}
+
 		}
 	}
 
