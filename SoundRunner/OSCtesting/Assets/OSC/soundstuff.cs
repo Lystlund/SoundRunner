@@ -303,7 +303,7 @@ public class soundstuff : MonoBehaviour {
 			}
 
 			//Debug.Log(enemiesMid[m]+ " "+enemiesMid[mn]);
-			Debug.Log(distanceMidNext+ " "+distanceMid);
+			//Debug.Log(distanceMidNext+ " "+distanceMid);
 			
 			if (distanceMidNext < distanceMid) {
 				//if(mn+1 == enemiesMid.Length) {
