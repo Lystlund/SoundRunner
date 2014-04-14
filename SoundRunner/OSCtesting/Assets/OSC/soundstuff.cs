@@ -371,7 +371,7 @@ public class soundstuff : MonoBehaviour {
 		listtoPD [5] = f2Mid;
 
 		listtoPD [6] = newPan;
-		Debug.Log (listtoPD[0]);
+		//Debug.Log (listtoPD[0]);
 
 		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
 

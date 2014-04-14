@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Movement.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\OSC\soundstuff.cs">
     <Files>
       <File FileName="Assets\Scripts\Movement.cs" Line="149" Column="1" />
-      <File FileName="Assets\Scripts\Movement.cs" Line="93" Column="31" />
+      <File FileName="Assets\OSC\soundstuff.cs" Line="357" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
