@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 
 public class Movement : MonoBehaviour {
+
 	public float mSpeed = 0.3f;
 	public int ObsHit = 0;
 	bool justStarted = true;
@@ -13,6 +14,7 @@ public class Movement : MonoBehaviour {
 	string fileName;
 	public AudioClip hurt;
 	public Vector3 heroPos;
+	public float ControlHolder;
 
 	IEnumerator WaitForStart() {
 		yield return new WaitForSeconds(1);
@@ -30,15 +32,15 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Update () {
+		ControlHolder = transform.position.x;
+
 		heroPos.x = transform.position.x;
 		heroPos.y = transform.position.y;
 		heroPos.z = transform.position.z;
-
-
+		
 		int level = Application.loadedLevel;
 		levelholder = level;
-
-
+		
 		/*
 		if((Input.GetKeyDown(KeyCode.A)))	 {
 			StreamWriter sw1 = new StreamWriter(fileName, true);
@@ -62,41 +64,43 @@ public class Movement : MonoBehaviour {
 			StartCoroutine (WaitForStart());
 		} 
 		else {
-			SphereCollider myCollider = transform.GetComponent<SphereCollider> ();
-
 			//Forward speed	
 			transform.position += new Vector3 (0, 0, mSpeed);
 
+			SphereCollider myCollider = transform.GetComponent<SphereCollider> ();
+
 			//Move left	
 			if (Input.GetKeyDown (KeyCode.A) && transform.position.x > -2.0f) {
-					transform.position += new Vector3 (-3.0f, 0, 0);
+				transform.position += new Vector3 (-3.0f, 0, 0);
 			}
-
+			
 			//Move right
 			if (Input.GetKeyDown (KeyCode.D) && transform.position.x < 2.0f) {
-					transform.position += new Vector3 (3.0f, 0, 0);
+				transform.position += new Vector3 (3.0f, 0, 0);
 			}
 
 			//jump	
 			if (Input.GetKeyDown (KeyCode.W) && transform.position.y < 0.8) {
 				rigidbody.AddForce(0, 25, 0 , ForceMode.Impulse);
 			}
+			
 			//if target gets to high, makes them fall down faster
 			if (transform.position.y > 2.5f){
 				rigidbody.AddForce(0, -2.5f, 0 , ForceMode.Impulse);
 			}
-
+			
 			//crouch	
 			if (Input.GetKey (KeyCode.S)) {
-					
+				
 				transform.localScale = new Vector3 (1, 0.5f, 1); //as long as s is pressed scale to this size 
 				myCollider.radius = 0.25f;
 				rigidbody.AddForce(0, -2, 0 , ForceMode.Impulse);
 			}
+			
 			//normal size
 			else {
-					transform.localScale = new Vector3 (1, 1, 1); //else be this size
-					myCollider.radius = 0.5f;
+				transform.localScale = new Vector3 (1, 1, 1); //else be this size
+				myCollider.radius = 0.5f;
 			}
 
 			if (Input.GetKey (KeyCode.Escape)) {
@@ -146,6 +150,10 @@ public class Movement : MonoBehaviour {
 
 			if (Application.loadedLevel == 7){
 				Application.LoadLevel(7);
+			}
+
+			if (Application.loadedLevel == 8){
+				Application.LoadLevel(8);
 			}
 		}
 	}
