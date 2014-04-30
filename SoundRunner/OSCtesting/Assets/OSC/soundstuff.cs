@@ -13,41 +13,59 @@ public class soundstuff : MonoBehaviour {
 	public GameObject[] enemiesHigh;
 	public List<float> enemiesHighDists = new List<float> ();
 
-	public GameObject[] enemiesMid;
-	public List<float> enemiesMidDists = new List<float> ();
+	public GameObject[] enemiesMidR;
+	public List<float> enemiesMidRDists = new List<float> ();
+
+	public GameObject[] enemiesMidL;
+	public List<float> enemiesMidLDists = new List<float> ();
 
 	public GameObject enemyLow;
 	public GameObject enemyHigh;
-	public GameObject enemyMid;
+	public GameObject enemyMidR;
+	public GameObject enemyMidL;
 
 	public float[] testingArray;
 	private float lowVar = 0;
 	private float highVar = 0;
-	private float midVar = 0;
+	private float midRVar = 0;
+	private float midLVar = 0;
+
 	private float zPosLow = 0;
 	private float zPosHigh = 0;
-	private float zPosMid = 0;
+	private float zPosMidR = 0;
+	private float zPosMidL = 0;
+
+	float lVolVar = 0;
+	float hVolVar = 0;
+	float mRVolVar = 0;
+	float mLVolVar = 0;
+
 	public float pan = 2;
 	public float newPan = 0;
 
 	private float distanceLow;
 	private float distanceHigh;
-	private float distanceMid;
+	private float distanceMidR;
+	private float distanceMidL;
 
 	private float distanceLowNext;
 	private float distanceHighNext;
-	private float distanceMidNext;
+	private float distanceMidRNext;
+	private float distanceMidLNext;
 
 	float closestLow = Mathf.Infinity;
 	float closestHigh = Mathf.Infinity;
-	float closestMid = Mathf.Infinity;
+	float closestMidR = Mathf.Infinity;
+	float closestMidL = Mathf.Infinity;
 
 	int l = 0;
 	int ln = 1;
 	int h = 0;
 	int hn = 1;
-	int m = 0;
-	int mn = 1;
+	int mr = 0;
+	int mrn = 1;
+	int ml = 0;
+	int mln = 1;
 
 	public float c = 34.0f;
 	//λ2 = λ (1 + v/c)	
@@ -55,11 +73,13 @@ public class soundstuff : MonoBehaviour {
 	public float f = 440.0f;
 	public float f2Low = 440.0f;
 	public float f2High = 440.0f;
-	public float f2Mid = 440.0f;
+	public float f2MidR = 440.0f;
+	public float f2MidL = 440.0f;
 
 	bool lowObjects = false;
 	bool highObjects = false;
-	bool midObjects = false;
+	bool midRObjects = false;
+	bool midLObjects = false;
 
 	List<float> listTest = new List<float>();
 
@@ -73,15 +93,18 @@ public class soundstuff : MonoBehaviour {
 
 		servers = new Dictionary<string, ServerLog>();
 
-		pan = 2;
-
 		listtoPD.Add (lowVar);
 		listtoPD.Add (zPosLow);
+		listtoPD.Add (lVolVar);
 		listtoPD.Add (highVar);
 		listtoPD.Add (zPosHigh);
-		listtoPD.Add (midVar);
-		listtoPD.Add (zPosMid);
-		listtoPD.Add (newPan);
+		listtoPD.Add (hVolVar);
+		listtoPD.Add (midRVar);
+		listtoPD.Add (zPosMidR);
+		listtoPD.Add (mRVolVar);
+		listtoPD.Add (midLVar);
+		listtoPD.Add (zPosMidL);
+		listtoPD.Add (mLVolVar);
 
 
 
@@ -90,6 +113,10 @@ public class soundstuff : MonoBehaviour {
 		listTest.Add (1.0f);
 		listTest.Add (9.0f);
 		listTest.Add (4.0f);
+
+
+
+//------------------------------------------------ CREATING THE ARRAYS ---------------------
 
 	//LOW OBSTACLES
 		enemiesLow = GameObject.FindGameObjectsWithTag ("LowOBS");
@@ -116,20 +143,17 @@ public class soundstuff : MonoBehaviour {
 			//Debug.Log ("SORTED GAME OBJECTS");
 			int iii = 0;
 			foreach (float f in enemiesLowDists) {
-					int swap = 0;
-					foreach (GameObject g in enemiesLow) {
-							if (g.transform.position.z == f) {
-									GameObject temp = g;
-									enemiesLow [swap] = enemiesLow [iii];
-									enemiesLow [iii] = temp;
-									iii++;
-							}
-							swap++;
+				int swap = 0;
+				foreach (GameObject g in enemiesLow) {
+					if (g.transform.position.z == f) {
+						GameObject temp = g;
+						enemiesLow [swap] = enemiesLow [iii];
+						enemiesLow [iii] = temp;
+						iii++;
 					}
-
-					//Debug.Log (iii);
+					swap++;
+				}
 			}
-
 		}
 
 	//HIGH OBSTACLES
@@ -152,63 +176,101 @@ public class soundstuff : MonoBehaviour {
 			}
 			int jjj = 0;
 			foreach (float f in enemiesHighDists) {
-					int swap = 0;
-					foreach (GameObject g in enemiesHigh) {
-							if (g.transform.position.z == f) {
-									GameObject temp = g;
-									enemiesHigh [swap] = enemiesHigh [jjj];
-									enemiesHigh [jjj] = temp;
-									jjj++;
-							}
-							swap++;
+				int swap = 0;
+				foreach (GameObject g in enemiesHigh) {
+					if (g.transform.position.z == f) {
+						GameObject temp = g;
+						enemiesHigh [swap] = enemiesHigh [jjj];
+						enemiesHigh [jjj] = temp;
+						jjj++;
 					}
+					swap++;
+				}
 			}
 		}
 
 
 
-	//MID OBSTACLES
+	//MID RIGHT OBSTACLES
 
-		enemiesMid = GameObject.FindGameObjectsWithTag ("MidOBS");
+		enemiesMidR = GameObject.FindGameObjectsWithTag ("MidROBS");
 
-		if (enemiesMid.Length > 0) {
-			midObjects = true;
+		if (enemiesMidR.Length > 0) {
+			midRObjects = true;
 			int k = 0;
-			foreach (GameObject g in enemiesMid) {
-					enemiesMidDists.Add (g.transform.position.z);
+			foreach (GameObject g in enemiesMidR) {
+					enemiesMidRDists.Add (g.transform.position.z);
 					k++;
 			}
 
-			enemiesMidDists.Sort ();
+			enemiesMidRDists.Sort ();
 
 			int kk = 0;
-			foreach (float f in enemiesMidDists) {
+			foreach (float f in enemiesMidRDists) {
 					//Debug.Log (f);
 					kk++;
 			}
 			int kkk = 0;
-			foreach (float f in enemiesMidDists) {
-					int swap = 0;
-					foreach (GameObject g in enemiesMid) {
-							if (g.transform.position.z == f) {
-									GameObject temp = g;
-									enemiesMid [swap] = enemiesMid [kkk];
-									enemiesMid [kkk] = temp;
-									kkk++;
-							}
-							swap++;
+			foreach (float f in enemiesMidRDists) {
+				int swap = 0;
+				foreach (GameObject g in enemiesMidR) {
+					if (g.transform.position.z == f) {
+						GameObject temp = g;
+						enemiesMidR [swap] = enemiesMidR [kkk];
+						enemiesMidR [kkk] = temp;
+						kkk++;
 					}
+					swap++;
+				}
 			}
 		}
 
+
+	//MID LEFT OBSTACLES
+		
+		enemiesMidL = GameObject.FindGameObjectsWithTag ("MidLOBS");
+		
+		if (enemiesMidL.Length > 0) {
+			midLObjects = true;
+			int k = 0;
+			foreach (GameObject g in enemiesMidL) {
+				enemiesMidLDists.Add (g.transform.position.z);
+				k++;
+			}
+			
+			enemiesMidLDists.Sort ();
+			
+			int kk = 0;
+			foreach (float f in enemiesMidLDists) {
+				//Debug.Log (f);
+				kk++;
+			}
+			int kkk = 0;
+			foreach (float f in enemiesMidLDists) {
+				int swap = 0;
+				foreach (GameObject g in enemiesMidL) {
+					if (g.transform.position.z == f) {
+						GameObject temp = g;
+						enemiesMidL [swap] = enemiesMidL [kkk];
+						enemiesMidL [kkk] = temp;
+						kkk++;
+					}
+					swap++;
+				}
+			}
+		}
+
+
 	}
-	
-	// Update is called once per frame
+
+
+
+// -------------------------------------------------   UPDATE !!!! -----------------------------------------------------
 	void Update () {
 
 
 	
-	//LOW
+	// --------------------- LOW
 		if (lowObjects) {
 			distanceLow = Vector3.Distance (enemiesLow [l].transform.position, transform.position);
 
@@ -217,8 +279,6 @@ public class soundstuff : MonoBehaviour {
 			else{
 				distanceLowNext = Vector3.Distance (enemiesLow [ln].transform.position, transform.position);
 			}
-
-
 
 			if (distanceLowNext < distanceLow) {
 				if(ln+1 > enemiesLow.Length-1) 
@@ -231,29 +291,30 @@ public class soundstuff : MonoBehaviour {
 
 			zPosLow = enemiesLow [l].transform.position.z - transform.position.z;
 
+			if(zPosLow < 1 && zPosLow > -1){ //Limiting it to not go below 1, since 0. values makes the sound go nuts.
+				zPosLow = 1;
+			}
 
-			if (zPosLow < 0) {	 								//REALIZED I MIGHT HAVE TO CHANGE THIS INTO PD
-					f2Low = (f * (c / (c + v))) / 350.0f;
+			lowVar =  Mathf.Abs( 1 / zPosLow * 100);
+			lVolVar =  40 - Mathf.Abs(20* Mathf.Log10(Mathf.Abs(zPosLow)));
+			if(lVolVar < 0)
+				lVolVar = 0;
+			//Debug.Log(zPosLow+ "  V: "+lowVar);
+		
+
+			if (zPosLow < 0) { // For Doppler
+				f2Low = 1;
 			}
 			if (zPosLow > 0) {
-					f2Low = (f * (c / (c - v))) / 350.0f;
+				f2Low = 0;
 			}
 
+			//Debug.Log(lVolVar);
 
-			if(zPosLow < 1 && zPosLow > 0){
-				zPosLow = 1;
-			}
-			else if(zPosLow < 0 && zPosLow > -1){
-				zPosLow = 1;
-			}
-
-			lowVar = Mathf.Abs( 1 / zPosLow * 100);
-			//if (lowVar > 50) {
-			//		lowVar = 50;	
-			//}
-			//Debug.Log (lowVar);
 		}
-	//HIGH
+
+
+	// --------------------- HIGH
 		if (highObjects) {
 			distanceHigh = Vector3.Distance (enemiesHigh [h].transform.position, transform.position);
 
@@ -275,15 +336,11 @@ public class soundstuff : MonoBehaviour {
 
 			zPosHigh = enemiesHigh [h].transform.position.z - transform.position.z;
 
-
-			//distanceHigh = Vector3.Distance(enemyHigh.transform.position, transform.position);
-			//zPosHigh = enemyHigh.transform.position.z - transform.position.z;
-
-			if (zPosHigh < 0) {	 								//REALIZED I MIGHT HAVE TO CHANGE THIS INTO PD
-					f2High = (f * (c / (c + v))) / 350.0f;
+			if (zPosHigh < 0) {
+				f2High = 1;
 			}
 			if (zPosHigh > 0) {
-					f2High = (f * (c / (c - v))) / 350.0f;
+				f2High = 0;
 			}
 			if(zPosHigh < 1 && zPosHigh > 0){
 				zPosHigh = 1;
@@ -291,102 +348,122 @@ public class soundstuff : MonoBehaviour {
 			else if(zPosHigh < 0 && zPosHigh > -1){
 				zPosHigh = 1;
 			}
-			highVar = Mathf.Abs( 1 / zPosHigh * 100);
-		}
-	//MID
-		if (midObjects) {
-			distanceMid = Vector3.Distance (enemiesMid [m].transform.position, transform.position);
 
-			if(mn > enemiesMid.Length-1)
+			highVar = Mathf.Abs( 1 / zPosHigh * 100);
+			hVolVar =  30 - Mathf.Abs(20* Mathf.Log10(Mathf.Abs(zPosHigh)));
+			if(hVolVar < 0)
+				hVolVar = 0;
+
+		}
+
+
+	// --------------------- MID RIGHT
+		if (midRObjects) {
+			distanceMidR = Vector3.Distance (enemiesMidR [mr].transform.position, transform.position);
+
+			if(mrn > enemiesMidR.Length-1)
 			{
 			}
 			else{
-				distanceMidNext = Vector3.Distance (enemiesMid [mn].transform.position, transform.position);
+				distanceMidRNext = Vector3.Distance (enemiesMidR [mrn].transform.position, transform.position);
 			}
-
-			//Debug.Log(enemiesMid[m]+ " "+enemiesMid[mn]);
-			//Debug.Log(distanceMidNext+ " "+distanceMid);
 			
-			if (distanceMidNext < distanceMid) {
-				//if(mn+1 == enemiesMid.Length) {
-			//	}
-				//else{
-					m++;
-					mn++;
-				//}
+			if (distanceMidRNext < distanceMidR) {
+					mr++;
+					mrn++;
 			}
 
-			zPosMid = enemiesMid [m].transform.position.z - transform.position.z;
+			zPosMidR = enemiesMidR [mr].transform.position.z - transform.position.z;
 
-
-			if (zPosMid < 0) {	 								//REALIZED I MIGHT HAVE TO CHANGE THIS INTO PD
-					f2Mid = (f * (c / (c + v))) / 350.0f;
-			}
-			if (zPosMid > 0) {
-					f2Mid = (f * (c / (c - v))) / 350.0f;
+			if(zPosMidR < 1 && zPosMidR > -1){ 
+				zPosMidR = 1;
 			}
 
-			if(zPosMid < 1 && zPosMid > 0){
-				zPosMid = 1;
+			midRVar = Mathf.Abs( 1 / zPosMidR * 100);
+			mRVolVar =  40 - Mathf.Abs(20* Mathf.Log10(Mathf.Abs(zPosMidR)));
+			if(mRVolVar < 0)
+				mRVolVar = 0;
+
+			if (zPosMidR < 0) {	 //Doppler
+				f2MidR = 1;
 			}
-			else if(zPosMid < 0 && zPosMid > -1){
-				zPosMid = 1;
+			if (zPosMidR > 0) {
+				f2MidR = 0;
 			}
-			midVar = Mathf.Abs( 1 / zPosMid* 100);
-			//if(midVar > 70 || midVar < -70){
-			//	midVar = 70;
-			//}
 
-
-			//Panning: 0 is left. 1 is right. 2 is both.
-
-			//OLD PAN
-			if (enemiesMid [m].transform.position.x > 0) {
+			//PAN
+			/*if (enemiesMidR [mr].transform.position.x > 0) {
 				pan = 1;
-				newPan = midVar;
+				newPan = midRVar;
 				if(newPan > 45){
 					newPan = 45;
 				}
 					//Debug.Log("RIGHT!");
 			} else {
 				pan = 0;
-				newPan = midVar*(-1);
+				newPan = midRVar*(-1);
 				if(newPan < -45){
 					newPan = -45;
 				}
-					//Debug.Log("LEFT!");
-			}
-			//Debug.Log(newPan);
-
-
+			}*/
 		}
+
+
+	// --------------- MID LEFT
+		if (midLObjects) {
+			distanceMidL = Vector3.Distance (enemiesMidL [ml].transform.position, transform.position);
+
+			if (mln > enemiesMidL.Length - 1) {
+			} else {
+					distanceMidLNext = Vector3.Distance (enemiesMidL [mln].transform.position, transform.position);
+			}
+
+			if (distanceMidLNext < distanceMidL) {
+					ml++;
+					mln++;
+			}
+
+			zPosMidL = enemiesMidL [ml].transform.position.z - transform.position.z;
+
+			if (zPosMidL < 1 && zPosMidL > -1) { 
+					zPosMidL = 1;
+			}
+
+			midLVar = Mathf.Abs (1 / zPosMidL * 100);
+			mLVolVar = 40 - Mathf.Abs (20 * Mathf.Log10 (Mathf.Abs (zPosMidL)));
+			if (mLVolVar < 0)
+					mLVolVar = 0;
+
+			if (zPosMidL < 0) {	 //Doppler
+					f2MidL = 1;
+			}
+			if (zPosMidL > 0) {
+					f2MidL = 0;
+			}
+		}
+
+
+
 
 		listtoPD [0] = lowVar;
 		listtoPD [1] = f2Low;
+		listtoPD [2] = lVolVar;
 
-		listtoPD [2] = highVar;
-		listtoPD [3] = f2High;
+		listtoPD [3] = highVar;
+		listtoPD [4] = f2High;
+		listtoPD [5] = hVolVar;
 
-		listtoPD [4] = midVar;
-		listtoPD [5] = f2Mid;
-
-		listtoPD [6] = newPan;
-		//Debug.Log (listtoPD[0]);
+		listtoPD [6] = midRVar;
+		listtoPD [7] = f2MidR;
+		listtoPD [8] = mRVolVar;
+		
+		listtoPD [9] = midLVar;
+		listtoPD [10] = f2MidL;
+		listtoPD [11] = mLVolVar;
 
 		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
 
 		// http://en.flossmanuals.net/pure-data/network-data/osc/ 
-
-
-
-		//Opposite Doppler. Don't use this.
-		/*
-		if(zPos<0){	 
-			λ2 = (λ *((c + v)/c))/350.0f;
-		}	 
-		if(zPos>0){	 
-			λ2 = (λ *((c - v)/c))/350.0f;
-		}*/
 
 
 	}
@@ -403,8 +480,13 @@ public class soundstuff : MonoBehaviour {
 		listtoPD [4] = 0;
 		listtoPD [5] = 0;
 		listtoPD [6] = 0;
+		listtoPD [7] = 0;
+		listtoPD [8] = 0;
+		listtoPD [9] = 0;
+		listtoPD [10] = 0;
+		listtoPD [11] = 0;
 
-		OSCHandler.Instance.Init(); //init OSC
+		OSCHandler.Instance.Init(); //Need to initialize it again, because apparently it gets deleted before this function is executed.
 
 		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
 
