@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour {
 	public AudioClip hurt;
 	public Vector3 heroPos;
 	public float ControlHolder;
+	public Tutorial tut;
+
 
 	IEnumerator WaitForStart() {
 		yield return new WaitForSeconds(1);
@@ -22,6 +24,8 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Start () {
+		tut = GetComponent<Tutorial> ();
+		
 		if (Application.loadedLevel == 1){
 			fileName = "SoundRunner_" + System.DateTime.Now.ToString("dd-MM-yy_hh-mm-ss") + ".txt"; 
 			clockInit = System.DateTime.Now.Second;
@@ -32,6 +36,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Update () {
+
 		ControlHolder = transform.position.x;
 
 		heroPos.x = transform.position.x;
@@ -112,7 +117,7 @@ public class Movement : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag == "LowOBS" || other.gameObject.tag == "MidOBS" || other.gameObject.tag == "HighOBS") { 
+		if (other.gameObject.tag == "LowOBS" || other.gameObject.tag == "MidROBS" || other.gameObject.tag == "MidLOBS" || other.gameObject.tag == "HighOBS") { 
 			AudioSource.PlayClipAtPoint(hurt,heroPos, 1.0f);
 	
 			if (Application.loadedLevel == 1){
@@ -155,6 +160,12 @@ public class Movement : MonoBehaviour {
 			if (Application.loadedLevel == 8){
 				Application.LoadLevel(8);
 			}
+
+			if (Application.loadedLevel == 9){
+				tut.TComplete = true;
+				Application.LoadLevel(9);
+			}
 		}
+		
 	}
 }

@@ -3,9 +3,11 @@ using System.Collections;
 
 public class Tutorial : MonoBehaviour {
 
+	public bool TComplete;
+
 	// Use this for initialization
 	void Start () {
-	
+		TComplete = false;
 	}
 	
 	// Update is called once per frame
@@ -77,20 +79,14 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		if (Application.loadedLevel == 7){
-			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,90), 
+			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,70), 
 			         
-			         "\nThis is the last part of the tutorial, you can now either choose to play the tutorial once more or\n" +
-			         "try to game, remember to learn the sounds properly as there will be no visual objects in the game.\n" +
-			         "The game takes around 3 minute to complete from this point.");
+			         "\nThis part of the tutorial you will need to dodge multiple objects in the same environment.\n" +
+			         "Remember to learn the sounds properly as there will be no visual objects in the next part.\n");
 			
-			
-			if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-200, 100, 30), "Replay Tutorial")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
 				enabled = false;
-				Application.LoadLevel(2);
-			}
-			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Play Game")){
-				enabled = false;
-				Application.LoadLevel(1);
+				Application.LoadLevel(9);
 			}
 		}
 
@@ -103,6 +99,25 @@ public class Tutorial : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
 				enabled = false;
 				Application.LoadLevel(3);
+			}
+		}
+
+		if (Application.loadedLevel == 9){
+			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,80), 
+			         
+			         "\nThis is the last part of the tutorial, to continue to the game you will need to complete this level\n" +
+			         "Remember to learn the sounds properly as there will be no visual objects in the game and it will only get harder.\n" +
+			         "THE GAME TAKES AROUND 3 MINUTES WHEN YOU START IT");
+
+			if (TComplete == true){
+				if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-200, 100, 30), "Replay Tutorial")){
+					enabled = false;
+					Application.LoadLevel(2);
+				}
+				if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Play Game")){
+					enabled = false;
+					Application.LoadLevel(1);
+				}
 			}
 		}
 	}
