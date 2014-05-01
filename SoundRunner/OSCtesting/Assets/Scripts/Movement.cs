@@ -10,7 +10,6 @@ public class Movement : MonoBehaviour {
 	public int ObsHit = 0;
 	bool justStarted = true;
 	public int levelholder;
-	public long clockInit = 0;
 	string fileName;
 	public AudioClip hurt;
 	public Vector3 heroPos;
@@ -34,13 +33,10 @@ public class Movement : MonoBehaviour {
 		leftPos = false;
 		rightPos = false;
 
-		tut = GetComponentInChildren<Tutorial> ();
-		
-		if (Application.loadedLevel == 1){
+		if (Application.loadedLevel == 1 || Application.loadedLevel == 10){
 			fileName = "SoundRunner_" + System.DateTime.Now.ToString("dd-MM-yy_hh-mm-ss") + ".txt"; 
-			clockInit = System.DateTime.Now.Second;
 			StreamWriter sw1 = new StreamWriter(fileName, true);
-			sw1.WriteLine("hit, time, zPos");
+			sw1.WriteLine("hit, zPos");
 			sw1.Close();
 		}
 	}
@@ -99,26 +95,26 @@ public class Movement : MonoBehaviour {
 			SphereCollider myCollider = transform.GetComponent<SphereCollider> ();
 
 			//Move left	
-			if (Input.GetKeyUp (KeyCode.A) && midPos == true)  {
+			if (Input.GetKeyDown (KeyCode.A) && midPos == true)  {
 				transform.position = leftVec;
 				leftPos = true;
 				midPos = false;
 			}
 
-			if (Input.GetKeyUp (KeyCode.A) && rightPos == true) {
+			if (Input.GetKeyDown (KeyCode.A) && rightPos == true) {
 				transform.position = midVec;
 				midPos = true;
 				rightPos = false;
 			}
 			
 			//Move right
-			if (Input.GetKeyUp (KeyCode.D) && midPos == true) {
+			if (Input.GetKeyDown (KeyCode.D) && midPos == true) {
 				transform.position = rightVec;
 				rightPos = true;
 				midPos = false;
 			}
 
-			if (Input.GetKeyUp (KeyCode.D) && leftPos == true) {
+			if (Input.GetKeyDown (KeyCode.D) && leftPos == true) {
 				transform.position = midVec;
 				midPos = true;
 				leftPos = false;
@@ -158,11 +154,10 @@ public class Movement : MonoBehaviour {
 		if (other.gameObject.tag == "LowOBS" || other.gameObject.tag == "MidROBS" || other.gameObject.tag == "MidLOBS" || other.gameObject.tag == "HighOBS") { 
 			AudioSource.PlayClipAtPoint(hurt,heroPos, 0.5f);
 	
-			if (Application.loadedLevel == 1){
+			if (Application.loadedLevel == 1 || Application.loadedLevel == 10){
 			ObsHit = ObsHit + 1;
-			long rightNow = System.DateTime.Now.Second;
 			StreamWriter sw1 = new StreamWriter(fileName, true);
-			sw1.WriteLine(ObsHit + ", " + (rightNow-clockInit) + ", " + transform.position.z);
+			sw1.WriteLine(ObsHit + ", " + transform.position.z);
 			sw1.Close();
 			}
 
@@ -200,9 +195,12 @@ public class Movement : MonoBehaviour {
 			}
 
 			if (Application.loadedLevel == 9){
-				tut.TComplete = true;
 				Application.LoadLevel(9);
 			}
+			if (Application.loadedLevel == 10){
+				Application.LoadLevel(0);
+			}
+
 		}
 		
 	}

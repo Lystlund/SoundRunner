@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Tutorial : MonoBehaviour {
 
-	public bool TComplete = false;
-	static bool created = false;
 
 
 	// Use this for initialization
@@ -15,16 +13,6 @@ public class Tutorial : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	}
-
-	void Awake() {
-		if(!created){
-			DontDestroyOnLoad(transform.parent.gameObject);
-			created = true;
-		}
-		else{
-			Destroy(transform.gameObject);
-		}
 	}
 
 	void OnGUI () {
@@ -102,33 +90,47 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		if (Application.loadedLevel == 8){
-			GUI.Box (new Rect (Screen.width / 2 - 250,Screen.height / 2-300,500,70), 
+			GUI.Box (new Rect (Screen.width / 2 - 250,Screen.height / 2-300,500,80), 
 			         
 			         "\nThis is a free environment to learn the controls of the game,\n" +
-			         "press W to jump, A to go left, S to crouch and D to go right.\n");
+			         "press W to jump, A to go left, S to crouch and D to go right.\n" + 
+			         "Please select if you have been designated as a Auditory tester or Visual tester.\n" );
 
-			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-200, 100, 30), "Test Auditory")){
 				enabled = false;
 				Application.LoadLevel(3);
+			}
+			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Test Visual")){
+				enabled = false;
+				Application.LoadLevel(1);
 			}
 		}
 
 		if (Application.loadedLevel == 9){
-			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,80), 
+			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,70), 
 			         
 			         "\nThis is the last part of the tutorial, to continue to the game you will need to complete this level\n" +
-			         "Remember to learn the sounds properly as there will be no visual objects in the game and it will only get harder.\n" +
-			         "THE GAME TAKES AROUND 3 MINUTES WHEN YOU START IT");
+			         "Remember to learn the sounds properly as there will be no visual objects in the game and it will only get harder.\n");
+			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
+				enabled = false;
+				Application.LoadLevel(11);
+			}
+	
+		}
 
-			if (TComplete == true){
-				if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-200, 100, 30), "Replay Tutorial")){
-					enabled = false;
-					Application.LoadLevel(2);
-				}
-				if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Play Game")){
-					enabled = false;
-					Application.LoadLevel(1);
-				}
+		if (Application.loadedLevel == 11){
+			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,80), 
+			         
+			         "\nIf you don't feel ready yet, please take your time and press ''Replay Tutorial'' to try the two last parts of the game\n" +
+			         "THE GAME TAKES AROUND 4 MINUTES WHEN YOU START IT. \n");
+			
+			if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-200, 100, 30), "Replay Tutorial")){
+				enabled = false;
+				Application.LoadLevel(7);
+			}
+			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Play Game")){
+				enabled = false;
+				Application.LoadLevel(1);
 			}
 		}
 	}
