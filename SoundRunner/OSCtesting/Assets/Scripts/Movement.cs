@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour {
 	public bool playDodgeSound = false;
 	bool hitIsPlaying = false;
 
+
 	IEnumerator WaitForStart() {
 		yield return new WaitForSeconds(1);
 		justStarted = false;
