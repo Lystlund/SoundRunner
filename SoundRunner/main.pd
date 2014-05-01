@@ -1,4 +1,4 @@
-#N canvas 2030 54 1137 751 10;
+#N canvas -31 249 1137 751 10;
 #X declare -lib mrpeach;
 #X obj 94 2 import mrpeach;
 #X obj 94 30 udpreceive 6666;
