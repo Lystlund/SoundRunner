@@ -111,11 +111,6 @@ public class Tutorial : MonoBehaviour {
 			         
 			         "\nThis is the last part of the tutorial, to continue to the game you will need to complete this level\n" +
 			         "Remember to learn the sounds properly as there will be no visual objects in the game and it will only get harder.\n");
-			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
-				enabled = false;
-				Application.LoadLevel(11);
-			}
-	
 		}
 
 		if (Application.loadedLevel == 11){

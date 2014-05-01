@@ -197,7 +197,7 @@ public class Movement : MonoBehaviour {
 			}
 
 			if (Application.loadedLevel == 9){
-				Application.LoadLevel(9);
+				Application.LoadLevel(11);
 			}
 			if (Application.loadedLevel == 10){
 				Application.LoadLevel(0);

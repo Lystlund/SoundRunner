@@ -356,7 +356,7 @@ public class soundstuff : MonoBehaviour {
 			if (zPosHigh < 0) {
 				f2High = 1;
 				if(shouldPlaySoundH){
-					Debug.Log("PLAY A SOUND");
+					//Debug.Log("PLAY A SOUND");
 					heroScript.PlayDodgeSound();
 					shouldPlaySoundH = false;
 				}
