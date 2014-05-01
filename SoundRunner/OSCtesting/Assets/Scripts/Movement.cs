@@ -35,10 +35,18 @@ public class Movement : MonoBehaviour {
 		leftPos = false;
 		rightPos = false;
 
-		if (Application.loadedLevel == 1 || Application.loadedLevel == 10){
-			fileName = "SoundRunner_" + System.DateTime.Now.ToString("dd-MM-yy_hh-mm-ss") + ".txt"; 
+		if (Application.loadedLevel == 1){
+			fileName = "SoundRunner_Visual_" + System.DateTime.Now.ToString("dd-MM-yy_hh-mm-ss") + ".txt"; 
 			StreamWriter sw1 = new StreamWriter(fileName, true);
-			sw1.WriteLine("hit, zPos");
+			sw1.WriteLine("Visual.");
+			sw1.WriteLine("hit, tag, zPos");
+			sw1.Close();
+		}
+		if (Application.loadedLevel == 10){
+			fileName = "SoundRunner_Auditory_" + System.DateTime.Now.ToString("dd-MM-yy_hh-mm-ss") + ".txt"; 
+			StreamWriter sw1 = new StreamWriter(fileName, true);
+			sw1.WriteLine("Auditory.");
+			sw1.WriteLine("hit, tag, zPos");
 			sw1.Close();
 		}
 	}
@@ -159,7 +167,7 @@ public class Movement : MonoBehaviour {
 			if (Application.loadedLevel == 1 || Application.loadedLevel == 10){
 			ObsHit = ObsHit + 1;
 			StreamWriter sw1 = new StreamWriter(fileName, true);
-			sw1.WriteLine(ObsHit + ", " + transform.position.z);
+			sw1.WriteLine(ObsHit + ", " + other.gameObject.tag + ", " + transform.position.z);
 			sw1.Close();
 			}
 

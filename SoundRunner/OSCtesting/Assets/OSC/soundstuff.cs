@@ -316,7 +316,7 @@ public class soundstuff : MonoBehaviour {
 			if (zPosLow < 0) { // For Doppler
 				f2Low = 1;
 				if(shouldPlaySoundL){
-					Debug.Log("PLAY A SOUND");
+					//Debug.Log("PLAY A SOUND");
 					heroScript.PlayDodgeSound();
 					shouldPlaySoundL = false;
 				}
@@ -412,7 +412,7 @@ public class soundstuff : MonoBehaviour {
 			if (zPosMidR < 0) {	 //Doppler
 				f2MidR = 1;
 				if(shouldPlaySoundMR){
-					Debug.Log("PLAY A SOUND");
+					//Debug.Log("PLAY A SOUND");
 					heroScript.PlayDodgeSound();
 					shouldPlaySoundMR = false;
 				}
@@ -468,7 +468,7 @@ public class soundstuff : MonoBehaviour {
 			if (zPosMidL < 0) {	 //Doppler
 					f2MidL = 1;
 				if(shouldPlaySoundML){
-					Debug.Log("PLAY A SOUND");
+					//Debug.Log("PLAY A SOUND");
 					heroScript.PlayDodgeSound();
 					shouldPlaySoundML = false;
 				}
