@@ -14,23 +14,20 @@ public class Tutorial : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	void Awake() {
 		if(!created){
-			DontDestroyOnLoad(transform.gameObject);
+			DontDestroyOnLoad(transform.parent.gameObject);
 			created = true;
-			Debug.Log("Created = true");
 		}
 		else{
-			Debug.Log("Removed Gameobject");
 			Destroy(transform.gameObject);
 		}
 	}
 
 	void OnGUI () {
-
 		if (Application.loadedLevel == 2){
 			GUI.Box (new Rect (Screen.width / 2 - 320,Screen.height / 2-200,640,100), 
 			        "\n Welcome to “Sound Runner” the game where hearing is more important than seeing. \n " +

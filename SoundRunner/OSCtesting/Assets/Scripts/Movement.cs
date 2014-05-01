@@ -81,6 +81,12 @@ public class Movement : MonoBehaviour {
 			sw1.Close();
 		}
 		*/
+
+
+		if (Application.loadedLevel == 9 && transform.position.z > 199) {
+			Destroy(this.gameObject);
+		}
+
 		
 		if (justStarted == true) {
 			StartCoroutine (WaitForStart());
