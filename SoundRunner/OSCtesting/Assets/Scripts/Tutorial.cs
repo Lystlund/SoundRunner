@@ -3,16 +3,30 @@ using System.Collections;
 
 public class Tutorial : MonoBehaviour {
 
-	public bool TComplete;
+	public bool TComplete = false;
+	static bool created = false;
+
 
 	// Use this for initialization
 	void Start () {
-		TComplete = false;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	void Awake() {
+		if(!created){
+			DontDestroyOnLoad(transform.gameObject);
+			created = true;
+			Debug.Log("Created = true");
+		}
+		else{
+			Debug.Log("Removed Gameobject");
+			Destroy(transform.gameObject);
+		}
 	}
 
 	void OnGUI () {

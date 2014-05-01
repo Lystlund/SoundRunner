@@ -16,7 +16,12 @@ public class Movement : MonoBehaviour {
 	public Vector3 heroPos;
 	public float ControlHolder;
 	public Tutorial tut;
-
+	Vector3 midVec;
+	Vector3 rightVec;
+	Vector3 leftVec;
+	bool midPos;
+	bool leftPos;
+	bool rightPos;
 
 	IEnumerator WaitForStart() {
 		yield return new WaitForSeconds(1);
@@ -24,7 +29,12 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Start () {
-		tut = GetComponent<Tutorial> ();
+
+		midPos = true;
+		leftPos = false;
+		rightPos = false;
+
+		tut = GetComponentInChildren<Tutorial> ();
 		
 		if (Application.loadedLevel == 1){
 			fileName = "SoundRunner_" + System.DateTime.Now.ToString("dd-MM-yy_hh-mm-ss") + ".txt"; 
@@ -36,13 +46,20 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Update () {
-
+		
 		ControlHolder = transform.position.x;
 
 		heroPos.x = transform.position.x;
 		heroPos.y = transform.position.y;
 		heroPos.z = transform.position.z;
-		
+
+		midVec = new Vector3 (0,heroPos.y,heroPos.z);
+		rightVec = new Vector3 (3,heroPos.y,heroPos.z);
+		leftVec = new Vector3 (-3,heroPos.y,heroPos.z);
+
+		//Debug.Log(heroPos.x);
+		//Debug.Log("Left: " + leftPos + "     Mid: " + midPos + "     Right: " + rightPos);  
+
 		int level = Application.loadedLevel;
 		levelholder = level;
 		
@@ -68,6 +85,7 @@ public class Movement : MonoBehaviour {
 		if (justStarted == true) {
 			StartCoroutine (WaitForStart());
 		} 
+
 		else {
 			//Forward speed	
 			transform.position += new Vector3 (0, 0, mSpeed);
@@ -75,17 +93,33 @@ public class Movement : MonoBehaviour {
 			SphereCollider myCollider = transform.GetComponent<SphereCollider> ();
 
 			//Move left	
-			if (Input.GetKeyDown (KeyCode.A) && transform.position.x > -2.0f) {
-				transform.position += new Vector3 (-3.0f, 0, 0);
+			if (Input.GetKeyUp (KeyCode.A) && midPos == true)  {
+				transform.position = leftVec;
+				leftPos = true;
+				midPos = false;
+			}
+
+			if (Input.GetKeyUp (KeyCode.A) && rightPos == true) {
+				transform.position = midVec;
+				midPos = true;
+				rightPos = false;
 			}
 			
 			//Move right
-			if (Input.GetKeyDown (KeyCode.D) && transform.position.x < 2.0f) {
-				transform.position += new Vector3 (3.0f, 0, 0);
+			if (Input.GetKeyUp (KeyCode.D) && midPos == true) {
+				transform.position = rightVec;
+				rightPos = true;
+				midPos = false;
+			}
+
+			if (Input.GetKeyUp (KeyCode.D) && leftPos == true) {
+				transform.position = midVec;
+				midPos = true;
+				leftPos = false;
 			}
 
 			//jump	
-			if (Input.GetKeyDown (KeyCode.W) && transform.position.y < 0.8) {
+			if (Input.GetKeyDown (KeyCode.W) && transform.position.y < 0.8f) {
 				rigidbody.AddForce(0, 25, 0 , ForceMode.Impulse);
 			}
 			
@@ -96,7 +130,6 @@ public class Movement : MonoBehaviour {
 			
 			//crouch	
 			if (Input.GetKey (KeyCode.S)) {
-				
 				transform.localScale = new Vector3 (1, 0.5f, 1); //as long as s is pressed scale to this size 
 				myCollider.radius = 0.25f;
 				rigidbody.AddForce(0, -2, 0 , ForceMode.Impulse);
@@ -111,14 +144,13 @@ public class Movement : MonoBehaviour {
 			if (Input.GetKey (KeyCode.Escape)) {
 				Application.LoadLevel(0);
 			}
-
 		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "LowOBS" || other.gameObject.tag == "MidROBS" || other.gameObject.tag == "MidLOBS" || other.gameObject.tag == "HighOBS") { 
-			AudioSource.PlayClipAtPoint(hurt,heroPos, 1.0f);
+			AudioSource.PlayClipAtPoint(hurt,heroPos, 0.5f);
 	
 			if (Application.loadedLevel == 1){
 			ObsHit = ObsHit + 1;
