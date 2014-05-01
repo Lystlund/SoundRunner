@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class soundstuff : MonoBehaviour {
 
+	GameObject hero;
+	Movement heroScript;
+
 	private Dictionary<string, ServerLog> servers;
 	private List<float> listtoPD = new List<float>();	
 
@@ -81,11 +84,20 @@ public class soundstuff : MonoBehaviour {
 	bool midRObjects = false;
 	bool midLObjects = false;
 
+	bool shouldPlaySoundL = false;
+	bool shouldPlaySoundH = false;
+	bool shouldPlaySoundMR = false;
+	bool shouldPlaySoundML = false;
+
+
 	List<float> listTest = new List<float>();
 
 
 	// Use this for initialization
 	void Start () {
+		hero = GameObject.FindGameObjectWithTag ("Player");
+		if(hero != null)
+			heroScript = hero.GetComponent<Movement> ();
 
 		OSCHandler.Instance.Init(); //init OSC
 		OSCHandler.Instance.SendMessageToClient ("pdThing", "/127.0.0.1", listtoPD);
@@ -268,7 +280,6 @@ public class soundstuff : MonoBehaviour {
 // -------------------------------------------------   UPDATE !!!! -----------------------------------------------------
 	void Update () {
 
-
 	
 	// --------------------- LOW
 		if (lowObjects) {
@@ -304,12 +315,18 @@ public class soundstuff : MonoBehaviour {
 
 			if (zPosLow < 0) { // For Doppler
 				f2Low = 1;
+				if(shouldPlaySoundL){
+					Debug.Log("PLAY A SOUND");
+					heroScript.PlayDodgeSound();
+					shouldPlaySoundL = false;
+				}
+
 			}
 			if (zPosLow > 0) {
 				f2Low = 0;
+				shouldPlaySoundL = true;
 			}
 
-			//Debug.Log(lVolVar);
 
 		}
 
@@ -338,10 +355,18 @@ public class soundstuff : MonoBehaviour {
 
 			if (zPosHigh < 0) {
 				f2High = 1;
+				if(shouldPlaySoundH){
+					Debug.Log("PLAY A SOUND");
+					heroScript.PlayDodgeSound();
+					shouldPlaySoundH = false;
+				}
 			}
 			if (zPosHigh > 0) {
 				f2High = 0;
+				shouldPlaySoundH = true;
 			}
+
+
 			if(zPosHigh < 1 && zPosHigh > 0){
 				zPosHigh = 1;
 			}
@@ -386,9 +411,15 @@ public class soundstuff : MonoBehaviour {
 
 			if (zPosMidR < 0) {	 //Doppler
 				f2MidR = 1;
+				if(shouldPlaySoundMR){
+					Debug.Log("PLAY A SOUND");
+					heroScript.PlayDodgeSound();
+					shouldPlaySoundMR = false;
+				}
 			}
 			if (zPosMidR > 0) {
 				f2MidR = 0;
+				shouldPlaySoundMR = true;
 			}
 
 			//PAN
@@ -436,10 +467,17 @@ public class soundstuff : MonoBehaviour {
 
 			if (zPosMidL < 0) {	 //Doppler
 					f2MidL = 1;
+				if(shouldPlaySoundML){
+					Debug.Log("PLAY A SOUND");
+					heroScript.PlayDodgeSound();
+					shouldPlaySoundML = false;
+				}
 			}
 			if (zPosMidL > 0) {
-					f2MidL = 0;
+				f2MidL = 0;
+				shouldPlaySoundML = true;
 			}
+
 		}
 
 

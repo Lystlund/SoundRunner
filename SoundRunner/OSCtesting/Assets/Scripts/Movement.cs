@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour {
 	public int levelholder;
 	string fileName;
 	public AudioClip hurt;
+	public AudioSource dodge;
 	public Vector3 heroPos;
 	public float ControlHolder;
 	public Tutorial tut;
@@ -21,6 +22,7 @@ public class Movement : MonoBehaviour {
 	bool midPos;
 	bool leftPos;
 	bool rightPos;
+	public bool playDodgeSound = false;
 
 	IEnumerator WaitForStart() {
 		yield return new WaitForSeconds(1);
@@ -204,4 +206,10 @@ public class Movement : MonoBehaviour {
 		}
 		
 	}
+
+	public void PlayDodgeSound(){
+		if (!audio.isPlaying)
+			dodge.Play ();
+	}
+
 }

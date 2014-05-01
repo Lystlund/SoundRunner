@@ -130,7 +130,7 @@ public class Tutorial : MonoBehaviour {
 			}
 			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Play Game")){
 				enabled = false;
-				Application.LoadLevel(1);
+				Application.LoadLevel(10);
 			}
 		}
 	}
