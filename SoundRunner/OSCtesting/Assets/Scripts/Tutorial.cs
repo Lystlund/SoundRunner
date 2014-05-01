@@ -17,7 +17,7 @@ public class Tutorial : MonoBehaviour {
 
 	void OnGUI () {
 		if (Application.loadedLevel == 2){
-			GUI.Box (new Rect (Screen.width / 2 - 320,Screen.height / 2-200,640,100), 
+			GUI.Box (new Rect (Screen.width / 2 - 320,Screen.height / 2-200,640,130), 
 			        "\n Welcome to “Sound Runner”, the game where hearing is more important than seeing. \n " +
 			        "The purpose of this game is to see if one of the most important factors of a game “the visuals” \n" +
 			        "can be replaced with continuous audio feedback. As in a normal runner game, \n " +
@@ -32,39 +32,39 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		if (Application.loadedLevel == 3){
-			GUI.Box (new Rect (Screen.width / 2 - 320,Screen.height / 2-300,640,70), 
+			GUI.Box (new Rect (Screen.width / 2 - 320,Screen.height / 2-300,640,80), 
 
 			         "\nThe first part of the tutorial is left side objects. When the panning is in the left ear, \n" +
 			         "it means an object on the left side is approaching, the rise in volume indicates a closing object. \n " +
 			         "In order to succeed, you need to dodge the object.");
 
-			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-180, 50, 30), "Next")){
 				enabled = false;
 				Application.LoadLevel(4);
 			}
 		}
 
 		if (Application.loadedLevel == 4){
-			GUI.Box (new Rect (Screen.width / 2 - 320,Screen.height / 2-300,640,50), 
+			GUI.Box (new Rect (Screen.width / 2 - 320,Screen.height / 2-300,640,70), 
 			         
 			         "\nRight side objects work the same way as left side objects, the panning just shifts to the right ear. \n" +
 			         "Note that when you successfully pass an object, a slight tone plays to notify you of this.");
 			
-			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-180, 50, 30), "Next")){
 				enabled = false;
 				Application.LoadLevel(5);
 			}
 		}
 
 		if (Application.loadedLevel == 5){
-			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,70), 
+			GUI.Box (new Rect (Screen.width / 2 - 340,Screen.height / 2-300,680,100), 
 
 			         "\nThe third object is the jump to dodge object. The sound is now slightly different than the previous examples \n " +
 			         "but still increases in volume as you get close.\n" +
 			         "In order to dodge this, try to pay some attention to the gravity of the game \n" +
 			         "so you can time your jumps based on the sound.");
 			
-			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-180, 50, 30), "Next")){
 				enabled = false;
 				Application.LoadLevel(6);
 			}
@@ -77,7 +77,7 @@ public class Tutorial : MonoBehaviour {
 			         "Try to remember the sound. After this, the final part of the tutorial, with multiple objects, will begin.");
 
 			
-			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-180, 50, 30), "Next")){
 				enabled = false;
 				Application.LoadLevel(7);
 			}
@@ -89,25 +89,25 @@ public class Tutorial : MonoBehaviour {
 			         "\nIn this part of the tutorial you will need to dodge multiple objects in the same environment.\n" +
 			         "Focus on learning the sounds properly as there will be no visual objects in the next part.\n");
 			
-			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-200, 50, 30), "Next")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 25,Screen.height / 2-180, 50, 30), "Next")){
 				enabled = false;
 				Application.LoadLevel(9);
 			}
 		}
 
 		if (Application.loadedLevel == 8){
-			GUI.Box (new Rect (Screen.width / 2 - 250,Screen.height / 2-300,500,80), 
+			GUI.Box (new Rect (Screen.width / 2 - 250,Screen.height / 2-300,500,100), 
 			         
 			         "\nThis is a free environment to learn the controls of the game,\n" +
 			         "Press W to jump, A to go left, S to crouch and D to go right. You can try this out now. \n" + 
 			         "After you understand the controls, please select if you have been designated \n " +
 			         "as a Auditory tester or Visual tester.\n" );
 
-			if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-200, 100, 30), "Test Auditory")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-180, 100, 30), "Test Auditory")){
 				enabled = false;
 				Application.LoadLevel(3);
 			}
-			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Test Visual")){
+			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-180, 100, 30), "Test Visual")){
 				enabled = false;
 				Application.LoadLevel(1);
 			}
@@ -127,11 +127,11 @@ public class Tutorial : MonoBehaviour {
 			         "THE GAME TAKES AROUND 4 MINUTES WHEN YOU START IT. \n " +
 			         "We would appreciate you playing the game through to the end. \n");
 			
-			if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-200, 100, 30), "Replay Tutorial")){
+			if (GUI.Button(new Rect(Screen.width / 2 - 150,Screen.height / 2-180, 100, 30), "Replay Tutorial")){
 				enabled = false;
 				Application.LoadLevel(7);
 			}
-			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-200, 100, 30), "Play Game")){
+			if (GUI.Button(new Rect(Screen.width / 2 + 60,Screen.height / 2-180, 100, 30), "Play Game")){
 				enabled = false;
 				Application.LoadLevel(10);
 			}
