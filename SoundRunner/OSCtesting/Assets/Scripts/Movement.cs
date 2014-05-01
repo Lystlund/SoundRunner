@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 	bool leftPos;
 	bool rightPos;
 	public bool playDodgeSound = false;
+	bool hitIsPlaying = false;
 
 	IEnumerator WaitForStart() {
 		yield return new WaitForSeconds(1);
@@ -163,6 +164,7 @@ public class Movement : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "LowOBS" || other.gameObject.tag == "MidROBS" || other.gameObject.tag == "MidLOBS" || other.gameObject.tag == "HighOBS") { 
 			AudioSource.PlayClipAtPoint(hurt,heroPos, 0.5f);
+			hitIsPlaying = true;
 	
 			if (Application.loadedLevel == 1 || Application.loadedLevel == 10){
 			ObsHit = ObsHit + 1;
@@ -217,7 +219,12 @@ public class Movement : MonoBehaviour {
 
 	public void PlayDodgeSound(){
 		if (!audio.isPlaying)
+			if (hitIsPlaying) {
+			hitIsPlaying = false;
+			} else {
 			dodge.Play ();
+			}
+			
 	}
 
 }
