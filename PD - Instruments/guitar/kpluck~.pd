@@ -35,11 +35,11 @@
 #X text 431 262 Delay specified by the frequency;
 #X text 445 310 Low-pass filter;
 #X text 433 373 DON'T SET THIS TO 1 OR ABOVE;
+#X obj 368 498 *~ 0.25;
 #X text 483 278 (a delay line whose length equals the period of the
 desired frequency);
 #X text 352 227 The delay amount in milliseconds. The period of the
 frequency (1/f);
-#X obj 368 498 *~ 0.5;
 #X connect 0 0 6 0;
 #X connect 0 0 22 0;
 #X connect 2 0 9 1;
@@ -64,8 +64,8 @@ frequency (1/f);
 #X connect 19 0 30 0;
 #X connect 20 0 21 0;
 #X connect 21 0 15 0;
-#X connect 21 0 38 0;
+#X connect 21 0 36 0;
 #X connect 26 0 20 0;
 #X connect 28 0 26 0;
 #X connect 28 0 29 0;
-#X connect 38 0 1 0;
+#X connect 36 0 1 0;
