@@ -1,4 +1,4 @@
-#N canvas 81 53 592 585 10;
+#N canvas 1077 99 592 585 10;
 #X obj 94 402 line 0 1;
 #X text 132 360 Azimuth: 0 - 360 (degrees);
 #X obj 49 424 inlet~;
